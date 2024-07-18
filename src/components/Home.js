@@ -8,7 +8,7 @@ const Home = () => {
     <>  
         <div className='h-screen flex flex-col'>
             <Navbar />
-            <div className='flex flex-col justify-center items-center flex-grow bg-blackPearl p-4'>
+            <div className='flex flex-col justify-center items-center flex-grow bg-blackPearl p-3'>
                 <div className='w-96 xs:w-80'>
                     <img src={Logo} alt='Logo' />
                 </div>

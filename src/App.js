@@ -3,6 +3,7 @@ import { BrowserRouter , Routes , Route } from "react-router-dom";
 import Home from './components/Home.js'
 import Rules from "./components/Rules.js";
 import Contact from "./components/Contact.js";
+import { ToastContainer } from "react-toastify";
 function App() {
   return (
     <>
@@ -12,6 +13,7 @@ function App() {
           <Route path="/rules" element={<Rules />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>
+        <ToastContainer />
       </BrowserRouter>
     </>
   );

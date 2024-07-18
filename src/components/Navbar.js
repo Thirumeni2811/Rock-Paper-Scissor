@@ -29,7 +29,7 @@ function ResponsiveAppBar() {
         <Toolbar>
           <a
             href="/"
-            className='grow font-extrabold text-5xl tracking-widest no-underline text-luckyOrange cursor-pointer xs:text-4xl xl:text-6xl'
+            className='grow font-extrabold text-5xl tracking-widest no-underline text-luckyOrange xs:text-4xl xl:text-6xl'
           >
             <div className='flex'>
                 <img src={Logo} alt='logo'
