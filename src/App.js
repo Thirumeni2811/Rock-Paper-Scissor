@@ -4,6 +4,7 @@ import Home from './components/Home.js'
 import Rules from "./components/Rules.js";
 import Contact from "./components/Contact.js";
 import { ToastContainer } from "react-toastify";
+import User from "./components/User.js";
 function App() {
   return (
     <>
@@ -12,6 +13,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/rules" element={<Rules />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/user" element={<User />} />
         </Routes>
         <ToastContainer />
       </BrowserRouter>
