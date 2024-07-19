@@ -1,101 +1,98 @@
 import React, { useRef } from 'react';
 import Navbar from './Navbar.js';
 import Box from '@mui/material/Box';
-import { withStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
+import { styled } from '@mui/material/styles';
+import TextField from '@mui/material/TextField';
 import SendIcon from '@mui/icons-material/Send';
 import Footer from './Footer';
 import { toast } from 'react-toastify';
 import emailjs from 'emailjs-com';
 import FeedbackIcon from '@mui/icons-material/Feedback';
 
-
 // luckyOrange: '#fc6a1a'
 // blackPearl: '#0b1116'
 // floralWhite: '#fefbec'
-
-const CssTextField = withStyles((theme) => ({
-    root: {
-      '& label.Mui-focused': {
-        color: '#fc6a1a',
-        marginLeft: '4px',
-      },
-      '& label': {
-        marginLeft: '4px',
-      },
-      '& .MuiInput-underline:after': {
-        borderBottomColor: '#fefbec',
-      },
-      '& .MuiOutlinedInput-root': {
-        '& fieldset': {
-          borderColor: '#fefbec',
-          border: '4px solid',
-          borderRadius: '6px',
-        },
-        '&:hover fieldset': {
-          borderColor: '#fc6a1a',
-          border: '6px solid',
-          borderRadius: '9px',
-        },
-        '&.Mui-focused fieldset': {
-          borderColor: '#fc6a1a',
-          border: '6px solid',
-          borderRadius: '12px',
-        },
-        '& input': {
-          color: '#fc6a1a',
-          fontWeight: 800,
-            backgroundColor: 'transparent',
-            '-webkit-text-fill-color': '#fc6a1a', 
-            '&:-webkit-autofill': {
-                '-webkit-box-shadow': '0 0 0 1000px #0b1116 inset',
-                '-webkit-text-fill-color': '#fc6a1a',
-                transition: 'background-color 5000s ease-in-out 0s',
-                boxShadow: 'inset 0 0 20px 20px #23232329',
-            },
-        },
-        '&.Mui-focused input': {
-          color: '#fefbec',
-          fontWeight: 800,
-          backgroundColor: 'transparent',
-            '-webkit-text-fill-color': '#fefbec', 
-            '&:-webkit-autofill': {
-                '-webkit-box-shadow': '0 0 0 1000px #0b1116 inset',
-                '-webkit-text-fill-color': '#fefbec',
-                transition: 'background-color 5000s ease-in-out 0s',
-                boxShadow: 'inset 0 0 20px 20px #23232329',
-            },
-        },
-        '&:hover input': {
-          color: '#fefbec',
-          fontWeight: 900,
-          backgroundColor: 'transparent',
-            '-webkit-text-fill-color': '#fefbec', 
-            '&:-webkit-autofill': {
-                '-webkit-box-shadow': '0 0 0 1000px #0b1116 inset',
-                '-webkit-text-fill-color': '#fefbec',
-                transition: 'background-color 5000s ease-in-out 0s',
-                boxShadow: 'inset 0 0 20px 20px #23232329',
-            },
-        },
-        '& textarea': {
-          color: '#fc6a1a',
-          fontWeight: 800,
-        },
-        '&.Mui-focused textarea': {
-          color: '#fefbec',
-          fontWeight: 800,
-        },
-        '&:hover textarea': {
-          color: '#fefbec',
-          fontWeight: 900,
-        },
-      },
-      '& .MuiInputLabel-root': {
-        color: '#fc6a1a',
+// Define the styles for the TextField
+const CssTextField = styled(TextField)(({ theme }) => ({
+  '& label.Mui-focused': {
+    color: '#fc6a1a',
+    marginLeft: '4px',
+  },
+  '& label': {
+    marginLeft: '4px',
+  },
+  '& .MuiInput-underline:after': {
+    borderBottomColor: '#fefbec',
+  },
+  '& .MuiOutlinedInput-root': {
+    '& fieldset': {
+      borderColor: '#fefbec',
+      border: '4px solid',
+      borderRadius: '6px',
+    },
+    '&:hover fieldset': {
+      borderColor: '#fc6a1a',
+      border: '6px solid',
+      borderRadius: '9px',
+    },
+    '&.Mui-focused fieldset': {
+      borderColor: '#fc6a1a',
+      border: '6px solid',
+      borderRadius: '12px',
+    },
+    '& input': {
+      color: '#fc6a1a',
+      fontWeight: 800,
+      backgroundColor: 'transparent',
+      '-webkit-text-fill-color': '#fc6a1a', 
+      '&:-webkit-autofill': {
+        '-webkit-box-shadow': '0 0 0 1000px #0b1116 inset',
+        '-webkit-text-fill-color': '#fc6a1a',
+        transition: 'background-color 5000s ease-in-out 0s',
+        boxShadow: 'inset 0 0 20px 20px #23232329',
       },
     },
-  }))(TextField);
+    '&.Mui-focused input': {
+      color: '#fefbec',
+      fontWeight: 800,
+      backgroundColor: 'transparent',
+      '-webkit-text-fill-color': '#fefbec', 
+      '&:-webkit-autofill': {
+        '-webkit-box-shadow': '0 0 0 1000px #0b1116 inset',
+        '-webkit-text-fill-color': '#fefbec',
+        transition: 'background-color 5000s ease-in-out 0s',
+        boxShadow: 'inset 0 0 20px 20px #23232329',
+      },
+    },
+    '&:hover input': {
+      color: '#fefbec',
+      fontWeight: 900,
+      backgroundColor: 'transparent',
+      '-webkit-text-fill-color': '#fefbec', 
+      '&:-webkit-autofill': {
+        '-webkit-box-shadow': '0 0 0 1000px #0b1116 inset',
+        '-webkit-text-fill-color': '#fefbec',
+        transition: 'background-color 5000s ease-in-out 0s',
+        boxShadow: 'inset 0 0 20px 20px #23232329',
+      },
+    },
+    '& textarea': {
+      color: '#fc6a1a',
+      fontWeight: 800,
+    },
+    '&.Mui-focused textarea': {
+      color: '#fefbec',
+      fontWeight: 800,
+    },
+    '&:hover textarea': {
+      color: '#fefbec',
+      fontWeight: 900,
+    },
+  },
+  '& .MuiInputLabel-root': {
+    color: '#fc6a1a',
+  },
+}));
 
 const Contact = () => {
   const form = useRef();
@@ -135,7 +132,6 @@ const Contact = () => {
                   noValidate
                   autoComplete="off"
                   className='flex flex-col space-y-4 xs:space-y-3.5'
-                  
                 >
                   <CssTextField
                     id='name'

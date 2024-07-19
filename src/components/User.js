@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Box from '@mui/material/Box';
-import { withStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
+import { styled } from '@mui/material/styles';
+import TextField from '@mui/material/TextField';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LoginIcon from '@mui/icons-material/Login';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
@@ -20,88 +20,86 @@ import { setDoc , doc} from 'firebase/firestore';
 import PersonIcon from '@mui/icons-material/Person';
 // import './User.css'
 
-const CssTextField = withStyles((theme) => ({
-    root: {
-        '& label.Mui-focused': {
-            color: '#fc6a1a',
-            marginLeft: '4px',
-        },
-        '& label': {
-            marginLeft: '4px',
-        },
-        '& .MuiInput-underline:after': {
-            borderBottomColor: '#fefbec',
-        },
-        '& .MuiOutlinedInput-root': {
-            '& fieldset': {
-                borderColor: '#fefbec',
-                border: '4px solid',
-                borderRadius: '6px',
-            },
-            '&:hover fieldset': {
-                borderColor: '#fc6a1a',
-                border: '6px solid',
-                borderRadius: '9px',
-            },
-            '&.Mui-focused fieldset': {
-                borderColor: '#fc6a1a',
-                border: '6px solid',
-                borderRadius: '12px',
-            },
-            '& input': {
-                color: '#fc6a1a',
-                fontWeight: 800,
-                backgroundColor: 'transparent',
-                '-webkit-text-fill-color': '#fc6a1a',
-                '&:-webkit-autofill': {
-                    '-webkit-box-shadow': '0 0 0 1000px #0b1116 inset',
-                    '-webkit-text-fill-color': '#fc6a1a',
-                    transition: 'background-color 5000s ease-in-out 0s',
-                    boxShadow: 'inset 0 0 20px 20px #23232329',
-                },
-            },
-            '&.Mui-focused input': {
-                color: '#fefbec',
-                fontWeight: 800,
-                backgroundColor: 'transparent',
-                '-webkit-text-fill-color': '#fefbec',
-                '&:-webkit-autofill': {
-                    '-webkit-box-shadow': '0 0 0 1000px #0b1116 inset',
-                    '-webkit-text-fill-color': '#fefbec',
-                    transition: 'background-color 5000s ease-in-out 0s',
-                    boxShadow: 'inset 0 0 20px 20px #23232329',
-                },
-            },
-            '&:hover input': {
-                color: '#fefbec',
-                fontWeight: 900,
-                backgroundColor: 'transparent',
-                '-webkit-text-fill-color': '#fefbec',
-                '&:-webkit-autofill': {
-                    '-webkit-box-shadow': '0 0 0 1000px #0b1116 inset',
-                    '-webkit-text-fill-color': '#fefbec',
-                    transition: 'background-color 5000s ease-in-out 0s',
-                    boxShadow: 'inset 0 0 20px 20px #23232329',
-                },
-            },
-            '& textarea': {
-                color: '#fc6a1a',
-                fontWeight: 800,
-            },
-            '&.Mui-focused textarea': {
-                color: '#fefbec',
-                fontWeight: 800,
-            },
-            '&:hover textarea': {
-                color: '#fefbec',
-                fontWeight: 900,
-            },
-        },
-        '& .MuiInputLabel-root': {
-            color: '#fc6a1a',
-        },
+const CssTextField = styled(TextField)(({ theme }) => ({
+    '& label.Mui-focused': {
+      color: '#fc6a1a',
+      marginLeft: '4px',
     },
-}))(TextField);
+    '& label': {
+      marginLeft: '4px',
+    },
+    '& .MuiInput-underline:after': {
+      borderBottomColor: '#fefbec',
+    },
+    '& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        borderColor: '#fefbec',
+        border: '4px solid',
+        borderRadius: '6px',
+      },
+      '&:hover fieldset': {
+        borderColor: '#fc6a1a',
+        border: '6px solid',
+        borderRadius: '9px',
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: '#fc6a1a',
+        border: '6px solid',
+        borderRadius: '12px',
+      },
+      '& input': {
+        color: '#fc6a1a',
+        fontWeight: 800,
+        backgroundColor: 'transparent',
+        '-webkit-text-fill-color': '#fc6a1a', 
+        '&:-webkit-autofill': {
+          '-webkit-box-shadow': '0 0 0 1000px #0b1116 inset',
+          '-webkit-text-fill-color': '#fc6a1a',
+          transition: 'background-color 5000s ease-in-out 0s',
+          boxShadow: 'inset 0 0 20px 20px #23232329',
+        },
+      },
+      '&.Mui-focused input': {
+        color: '#fefbec',
+        fontWeight: 800,
+        backgroundColor: 'transparent',
+        '-webkit-text-fill-color': '#fefbec', 
+        '&:-webkit-autofill': {
+          '-webkit-box-shadow': '0 0 0 1000px #0b1116 inset',
+          '-webkit-text-fill-color': '#fefbec',
+          transition: 'background-color 5000s ease-in-out 0s',
+          boxShadow: 'inset 0 0 20px 20px #23232329',
+        },
+      },
+      '&:hover input': {
+        color: '#fefbec',
+        fontWeight: 900,
+        backgroundColor: 'transparent',
+        '-webkit-text-fill-color': '#fefbec', 
+        '&:-webkit-autofill': {
+          '-webkit-box-shadow': '0 0 0 1000px #0b1116 inset',
+          '-webkit-text-fill-color': '#fefbec',
+          transition: 'background-color 5000s ease-in-out 0s',
+          boxShadow: 'inset 0 0 20px 20px #23232329',
+        },
+      },
+      '& textarea': {
+        color: '#fc6a1a',
+        fontWeight: 800,
+      },
+      '&.Mui-focused textarea': {
+        color: '#fefbec',
+        fontWeight: 800,
+      },
+      '&:hover textarea': {
+        color: '#fefbec',
+        fontWeight: 900,
+      },
+    },
+    '& .MuiInputLabel-root': {
+      color: '#fc6a1a',
+    },
+  }));
 
 const User = () => {
 
