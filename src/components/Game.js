@@ -1,0 +1,155 @@
+import React, { useEffect, useState } from 'react'
+import Navbar from './Navbar.js'
+import { Link } from 'react-router-dom';
+import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
+
+// luckyOrange: '#fc6a1a'
+// blackPearl: '#0b1116'
+// floralWhite: '#fefbec'
+
+// Rock >> Paper >> scissor >> Rock
+ 
+const Game = () => {
+
+    //user
+    const [userChoice, setUserChoice] = useState('Rock')
+    const [userPoints, setUserPoints] = useState(0)
+
+    //computer
+    const [computerChoice, setComputerChoice] = useState('Rock')
+    const [computerPoints, setComputerPoints] = useState(0)
+
+    //result
+    const [result, setResult] = useState('Let\'s see who wins')
+    const [turnResult, setTurnResult] = useState(null)
+
+    //endgame
+    const [gameOver, setGameOver] = useState(false)
+
+    //Choice
+    const Choices = ['Rock', 'Paper', 'Scissors']
+
+    //Game
+    const handleGame = (choice) => {
+        setUserChoice(choice)
+        generateComputerChoice()
+    }
+
+    // generate choice for computer
+    const generateComputerChoice = () =>  {
+        const randomChoice = Choices[Math.floor(Math.random() * Choices.length)]
+        setComputerChoice(randomChoice)
+    }
+
+    //restart the game
+    const resetGame = () => {
+        window.location.reload()
+    }
+
+    useEffect(() => {
+        const comboMoves = userChoice + computerChoice
+        if (userPoints <= 9 && computerPoints <= 9) {
+          if (comboMoves === 'ScissorsPaper' || comboMoves === 'RockScissors' || comboMoves === 'PaperRock') {
+            // userPoints.current += 1
+            const updatedUserPoints = userPoints + 1
+            setUserPoints(updatedUserPoints)
+            setTurnResult('User gets the point!')
+            if (updatedUserPoints === 10){
+              setResult('User Wins')
+              const gameOff = true
+              setGameOver(gameOff)
+            }
+          }
+    
+          if (comboMoves === 'PaperScissors' || comboMoves === 'ScissorsRock' || comboMoves === 'RockPaper') {
+            // computerPoints.current += 1
+            const updatedComputerPoints = computerPoints + 1
+            setComputerPoints(updatedComputerPoints)
+            setTurnResult('Computer gets the point!')
+            if (updatedComputerPoints === 10) {
+              setResult('Computer Wins')
+              const gameOff = true
+              setGameOver(gameOff)
+            }
+          }
+    
+          if (comboMoves === 'PaperPaper' || comboMoves === 'RockRock' || comboMoves === 'ScissorsScissors') {
+            setTurnResult('No one gets a point!')
+          }
+        }
+      }, [computerChoice, userChoice])
+    
+
+    return (
+        <>
+            <section className='h-screen bg-blackPearl'>
+                <Navbar />
+                <div className='sm:p-8 sm:py-4 bg-blackPearl'>
+                    {/* points */}
+                    <header className='points flex justify-between  font-bold xs:flex-col xs:text-center xs:p-6 xs:text-3xl sm:flex-col sm:text-4xl sm:text-center md:flex-row lg:p-2 lg:px-8 xl:px-20'>
+                        <div className='user'>
+                            <h1 className='text-luckyOrange'>User Points : <span className='text-floralWhite xs:text-4xl xs:font-extrabold sm:text-5xl sm:font-extrabold'>{userPoints}</span></h1>
+                        </div>
+                        <div className='computer'>
+                            <h1 className='text-floralWhite'>Computer Points : <span className='text-luckyOrange xs:text-4xl xs:font-extrabold sm:text-5xl sm:font-extrabold'>{computerPoints}</span></h1>
+                        </div>
+                    </header>
+
+                    {/* result */}
+                    <div className=' flex justify-center text-luckyOrange xs:my-3 xs:text-4xl xs:font-bold sm:my-4 sm:text-4xl sm:font-bold md:my-7 lg:text-5xl xl:my-5'>
+                        <h1>{result}</h1>
+                        <Link to='/rules'>
+                            <HelpOutlineIcon className='ml-3 text-floralWhite'/>
+                        </Link>
+                    </div>
+
+                    {/* endgame */}
+                    <div className='text-center'>
+                        {gameOver && 
+                            <button 
+                                onClick={() =>resetGame()}
+                                className="ring-4 ring-floralWhite px-8 py-2 text-luckyOrange font-bold text-2xl rounded-md hover:text-floralWhite hover:ring-luckyOrange xs:text-lg xs:px-4"
+                            >
+                                Play Again ?
+                            </button>
+                        }
+                    </div>
+
+                    {/* action */}
+                    <div className='lg:flex lg:justify-center'>
+                        <main className='action flex justify-around p-8 gap-4 xs:p-4 xs:py-8 sm:p-0 sm:py-6 lg:gap-24 '>
+                            <div className='user border-8 text-floralWhite border-floralWhite'>
+                                <img className='scale-x-[-1]' src={require(`../assets/${userChoice.toLowerCase()}.png`)} alt={userChoice}/>
+                            </div>
+                            <div className='computer border-8  border-floralWhite'>
+                                <img src={require(`../assets/${computerChoice.toLowerCase()}.png`)} alt={computerChoice}/>
+                            </div>
+                        </main>
+                    </div>
+
+                    {/* choice */}
+                    <article className='text-center'>
+                        {Choices.map((choice, index) => 
+                             <button 
+                                disabled={gameOver}
+                                key={index} 
+                                onClick={() => handleGame(choice)}
+                                className="ring-4 ring-floralWhite px-8 py-2 my-4 text-luckyOrange xs:mx-4 font-bold text-2xl rounded-md hover:text-floralWhite hover:ring-luckyOrange xs:text-lg xs:px-4 mx-4 "
+                             >
+                                {choice}
+                            </button>
+                        )}
+                    </article>
+
+                    {/* result */}
+                    <div className='text-center text-luckyOrange xs:my-4 xs:text-2xl xs:font-bold sm:my-4 sm:text-3xl font-bold'>
+                        <h1>{turnResult}</h1>
+                    </div>
+
+                </div>
+            </section>
+        </>
+    )
+}
+
+export default Game
