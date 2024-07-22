@@ -1,84 +1,132 @@
-import React, { useEffect, useState } from 'react'
-import Navbar from './Navbar.js'
+import React, { useEffect, useState } from 'react';
+import Navbar from './Navbar.js';
 import { Link } from 'react-router-dom';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
+import RestartAltIcon from '@mui/icons-material/RestartAlt';
+import { addDoc, collection, doc, getDoc } from 'firebase/firestore';
+import { auth, db } from '../firebase';
 
+// Colors
 // luckyOrange: '#fc6a1a'
 // blackPearl: '#0b1116'
 // floralWhite: '#fefbec'
 
-// Rock >> Paper >> scissor >> Rock
- 
 const Game = () => {
+    // user
+    const [userChoice, setUserChoice] = useState('Rock');
+    const [userPoints, setUserPoints] = useState(0);
 
-    //user
-    const [userChoice, setUserChoice] = useState('Rock')
-    const [userPoints, setUserPoints] = useState(0)
+    // computer
+    const [computerChoice, setComputerChoice] = useState('Rock');
+    const [computerPoints, setComputerPoints] = useState(0);
 
-    //computer
-    const [computerChoice, setComputerChoice] = useState('Rock')
-    const [computerPoints, setComputerPoints] = useState(0)
+    // result
+    const [result, setResult] = useState('Let\'s see who wins');
+    const [turnResult, setTurnResult] = useState(null);
 
-    //result
-    const [result, setResult] = useState('Let\'s see who wins')
-    const [turnResult, setTurnResult] = useState(null)
+    // endgame
+    const [gameOver, setGameOver] = useState(false);
 
-    //endgame
-    const [gameOver, setGameOver] = useState(false)
+    // user details
+    const [Email, setEmail] = useState("");
+    const [Name, setName] = useState("");
+    const [currentUser, setCurrentUser] = useState(null);
+    const [User_ID, setUser_ID] = useState(null); 
 
-    //Choice
-    const Choices = ['Rock', 'Paper', 'Scissors']
+    // Choices
+    const Choices = ['Rock', 'Paper', 'Scissors'];
 
-    //Game
+    // handle game choice
     const handleGame = (choice) => {
-        setUserChoice(choice)
-        generateComputerChoice()
-    }
+        setUserChoice(choice);
+        generateComputerChoice();
+    };
 
     // generate choice for computer
-    const generateComputerChoice = () =>  {
-        const randomChoice = Choices[Math.floor(Math.random() * Choices.length)]
-        setComputerChoice(randomChoice)
-    }
+    const generateComputerChoice = () => {
+        const randomChoice = Choices[Math.floor(Math.random() * Choices.length)];
+        setComputerChoice(randomChoice);
+    };
 
-    //restart the game
+    // restart the game
     const resetGame = () => {
-        window.location.reload()
-    }
+        window.location.reload();
+    };
 
-    useEffect(() => {
-        const comboMoves = userChoice + computerChoice
-        if (userPoints <= 9 && computerPoints <= 9) {
-          if (comboMoves === 'ScissorsPaper' || comboMoves === 'RockScissors' || comboMoves === 'PaperRock') {
-            // userPoints.current += 1
-            const updatedUserPoints = userPoints + 1
-            setUserPoints(updatedUserPoints)
-            setTurnResult('User gets the point!')
-            if (updatedUserPoints === 10){
-              setResult('User Wins')
-              const gameOff = true
-              setGameOver(gameOff)
+    // store the result in the db
+    const storeResult = async (result) => {
+        try {
+            if (User_ID) { 
+                await addDoc(collection(db, "Game"), { 
+                    userID: User_ID, 
+                    userPoints: userPoints,
+                    computerPoints: computerPoints,
+                    result: result,
+                    timestamp: new Date(),
+                });
+                console.log('Data Stored');
             }
-          }
-    
-          if (comboMoves === 'PaperScissors' || comboMoves === 'ScissorsRock' || comboMoves === 'RockPaper') {
-            // computerPoints.current += 1
-            const updatedComputerPoints = computerPoints + 1
-            setComputerPoints(updatedComputerPoints)
-            setTurnResult('Computer gets the point!')
-            if (updatedComputerPoints === 10) {
-              setResult('Computer Wins')
-              const gameOff = true
-              setGameOver(gameOff)
-            }
-          }
-    
-          if (comboMoves === 'PaperPaper' || comboMoves === 'RockRock' || comboMoves === 'ScissorsScissors') {
-            setTurnResult('No one gets a point!')
-          }
+        } catch (e) {
+            console.error("Error adding document: ", e);
         }
-      }, [computerChoice, userChoice])
-    
+    };
+
+    // get the data from db
+    useEffect(() => {
+        const fetchUserData = async () => {
+            auth.onAuthStateChanged(async (user) => {
+                if (user) {
+                    const docRef = doc(db, "User", user.uid);
+                    const docSnap = await getDoc(docRef);
+                    if (docSnap.exists()) {
+                        const { Name, Email, User_ID } = docSnap.data();
+                        setEmail(Email);
+                        setName(Name);
+                        setUser_ID(user.uid); 
+                        setCurrentUser(user);
+                        console.log(docSnap.data());
+                    } else {
+                        console.log("No such document!");
+                    }
+                } else {
+                    setCurrentUser(null);
+                }
+            });
+        };
+        fetchUserData();
+    }, []);
+
+    // game result
+    useEffect(() => {
+        const comboMoves = userChoice + computerChoice;
+        if (userPoints <= 10 && computerPoints <= 10) { 
+            if (comboMoves === 'ScissorsPaper' || comboMoves === 'RockScissors' || comboMoves === 'PaperRock') {
+                const updatedUserPoints = userPoints + 1;
+                setUserPoints(updatedUserPoints);
+                setTurnResult('User gets the point!');
+                if (updatedUserPoints === 10) {
+                    setResult('User Wins');
+                    setGameOver(true);
+                    storeResult('User Wins');
+                }
+            }
+
+            if (comboMoves === 'PaperScissors' || comboMoves === 'ScissorsRock' || comboMoves === 'RockPaper') {
+                const updatedComputerPoints = computerPoints + 1;
+                setComputerPoints(updatedComputerPoints);
+                setTurnResult('Computer gets the point!');
+                if (updatedComputerPoints === 10) {
+                    setResult('Computer Wins');
+                    setGameOver(true);
+                    storeResult('Computer Wins');
+                }
+            }
+
+            if (comboMoves === 'PaperPaper' || comboMoves === 'RockRock' || comboMoves === 'ScissorsScissors') {
+                setTurnResult('No one gets a point!');
+            }
+        }
+    }, [computerChoice, userChoice]);
 
     return (
         <>
@@ -86,7 +134,7 @@ const Game = () => {
                 <Navbar />
                 <div className='sm:p-8 sm:py-4 bg-blackPearl'>
                     {/* points */}
-                    <header className='points flex justify-between  font-bold xs:flex-col xs:text-center xs:p-6 xs:text-3xl sm:flex-col sm:text-4xl sm:text-center md:flex-row lg:p-2 lg:px-8 xl:px-20'>
+                    <header className='points flex justify-between font-bold xs:flex-col xs:text-center xs:p-6 xs:text-3xl sm:flex-col sm:text-4xl sm:text-center md:flex-row lg:p-2 lg:px-8 xl:px-20'>
                         <div className='user'>
                             <h1 className='text-luckyOrange'>User Points : <span className='text-floralWhite xs:text-4xl xs:font-extrabold sm:text-5xl sm:font-extrabold'>{userPoints}</span></h1>
                         </div>
@@ -96,7 +144,7 @@ const Game = () => {
                     </header>
 
                     {/* result */}
-                    <div className=' flex justify-center text-luckyOrange xs:my-3 xs:text-4xl xs:font-bold sm:my-4 sm:text-4xl sm:font-bold md:my-7 lg:text-5xl xl:my-5'>
+                    <div className='flex justify-center text-luckyOrange xs:my-3 xs:text-4xl xs:font-bold sm:my-4 sm:text-4xl sm:font-bold md:my-7 lg:text-5xl xl:my-5'>
                         <h1>{result}</h1>
                         <Link to='/rules'>
                             <HelpOutlineIcon className='ml-3 text-floralWhite'/>
@@ -107,10 +155,11 @@ const Game = () => {
                     <div className='text-center'>
                         {gameOver && 
                             <button 
-                                onClick={() =>resetGame()}
+                                onClick={() => resetGame()}
                                 className="ring-4 ring-floralWhite px-8 py-2 text-luckyOrange font-bold text-2xl rounded-md hover:text-floralWhite hover:ring-luckyOrange xs:text-lg xs:px-4"
                             >
-                                Play Again ?
+                                Play Again 
+                                <RestartAltIcon className='-mt-1 ml-2' />
                             </button>
                         }
                     </div>
@@ -121,7 +170,7 @@ const Game = () => {
                             <div className='user border-8 text-floralWhite border-floralWhite'>
                                 <img className='scale-x-[-1]' src={require(`../assets/${userChoice.toLowerCase()}.png`)} alt={userChoice}/>
                             </div>
-                            <div className='computer border-8  border-floralWhite'>
+                            <div className='computer border-8 border-floralWhite'>
                                 <img src={require(`../assets/${computerChoice.toLowerCase()}.png`)} alt={computerChoice}/>
                             </div>
                         </main>
@@ -149,7 +198,7 @@ const Game = () => {
                 </div>
             </section>
         </>
-    )
-}
+    );
+};
 
-export default Game
+export default Game;

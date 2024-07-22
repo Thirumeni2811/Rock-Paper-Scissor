@@ -165,7 +165,7 @@ const Forget = () => {
           </a>
         </header>
 
-        <main className='bg-blackPearl py-16'>
+        <main className='bg-blackPearl py-16 xs:py-20'>
             <div className=' p-8 xs:px-0'>
                 <div className='border-lightBlue border-double border-4 py-7 mx-4 rounded-2xl xl:mx-32'>
                     <div>

@@ -25,7 +25,7 @@ function ResponsiveAppBar() {
   const [currentUser, setCurrentUser] = useState(null);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const isXS = useMediaQuery('(max-width:676px)');
+  const isXS = useMediaQuery('(max-width:756px)');
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
@@ -83,7 +83,7 @@ function ResponsiveAppBar() {
             console.log("No user data found in Firestore");
           }
         } else {
-          setCurrentUser(null); // Clear user data if not logged in
+          setCurrentUser(null); 
         }
       });
     };

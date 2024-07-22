@@ -18,6 +18,7 @@ import { auth , db} from '../firebase.js';
 import { useNavigate , Link} from 'react-router-dom';
 import { setDoc , doc} from 'firebase/firestore';
 import PersonIcon from '@mui/icons-material/Person';
+import Google from './Google.js';
 // import './User.css'
 
 const CssTextField = styled(TextField)(({ theme }) => ({
@@ -202,7 +203,8 @@ const User = () => {
             if(user){
                 await setDoc(doc(db, "User",user.uid),{
                     Email : user.email,
-                    Name : Name
+                    Name : Name ,
+                    User_ID : user.uid
                 })
                 console.log("Successfully Registered")
                 toast.success("Successfully Registered !!",{
@@ -305,6 +307,7 @@ const User = () => {
                                     </button>
                                 </div>
                             </form>
+                            <Google />
                         </div>
                         <div className='bg-lightBlue p-8 px-16 rounded-r-3xl xs:rounded-t-3xl xs:rounded-none xs:text-center xs:p-2 xs:pb-4 xs:px-2 sm:px-1.5 sm:content-center xl:px-20'>
                             <h1 className='text-luckyOrange text-5xl font-bold xs:text-3xl sm:text-3xl md:text-5xl text-center'>
