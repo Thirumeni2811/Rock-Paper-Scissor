@@ -15,7 +15,7 @@ import { toast } from 'react-toastify';
 import Logo from '../assets/logo.png'
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { auth , db} from '../firebase.js';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate , Link} from 'react-router-dom';
 import { setDoc , doc} from 'firebase/firestore';
 import PersonIcon from '@mui/icons-material/Person';
 // import './User.css'
@@ -245,12 +245,12 @@ const User = () => {
                 </header>
                 {isLogin ? (
                     <div className='bg-blackPearl flex p-8 xs:px-6 xs:flex-col-reverse sm:p-4 md:p-8 '  id='login'>
-                        <div className='w-screen border-4 border-[#BCCDDC] py-8 rounded-l-3xl xs:w-auto xs:rounded-b-3xl xs:py-4 xs:rounded-none sm:content-center xl:px-5'>
+                        <div className='w-screen border-4 border-lightBlue py-8 rounded-l-3xl xs:w-auto xs:rounded-b-3xl xs:py-4 xs:rounded-none sm:content-center xl:px-5'>
                             <h1 className='text-luckyOrange text-center font-bold text-5xl xs:text-4xl'>
                                 <AccountCircleIcon className='mr-2 mb-2 text-floralWhite' style={{ fontSize: '2.8rem' }} />
                                 LogIn
                             </h1>
-                            <h2 className='text-[#BCCDDC] text-center font-semibold text-3xl xs:text-lg'>Glad you're back...</h2>
+                            <h2 className='text-lightBlue text-center font-semibold text-3xl xs:text-lg'>Glad you're back...</h2>
                             <form className='p-4' onSubmit={logIn}>
                                 <div className='m-8 flex justify-center'>
                                     <div className='w-screen text-center px-8 xs:px-0 sm:w-72 sm:px-0 md:px-8 md:min-w-full lg:w-3/5 xl:w-5/6'>
@@ -293,6 +293,11 @@ const User = () => {
                                         </Box>
                                     </div>
                                 </div>
+                                <div className='text-luckyOrange text-center -mt-4 m-6 hover:text-floralWhite font-bold xs:text-2xl sm:text-2xl md:text-3xl '>
+                                    <Link to='/forget'>
+                                        Forgot Password?
+                                    </Link>
+                                </div>
                                 <div className='text-center'>
                                     <button disabled={loading} type="submit" className="ring-4 ring-floralWhite px-8 py-2 text-luckyOrange font-bold text-2xl rounded-md hover:text-floralWhite hover:ring-luckyOrange xs:text-lg xs:px-4">
                                         Login
@@ -301,7 +306,7 @@ const User = () => {
                                 </div>
                             </form>
                         </div>
-                        <div className='bg-[#BCCDDC] p-8 px-16 rounded-r-3xl xs:rounded-t-3xl xs:rounded-none xs:text-center xs:p-2 xs:pb-4 xs:px-2 sm:px-1.5 sm:content-center xl:px-20'>
+                        <div className='bg-lightBlue p-8 px-16 rounded-r-3xl xs:rounded-t-3xl xs:rounded-none xs:text-center xs:p-2 xs:pb-4 xs:px-2 sm:px-1.5 sm:content-center xl:px-20'>
                             <h1 className='text-luckyOrange text-5xl font-bold xs:text-3xl sm:text-3xl md:text-5xl text-center'>
                                 Welcome Back
                                 <WavingHandIcon className='ml-3' sx={{ fontSize: '2.8rem', marginTop: -.5 }} />
@@ -321,12 +326,12 @@ const User = () => {
                     </div>
                 ) : (
                     <div className='bg-blackPearl flex flex-row-reverse p-8 xs:px-6 xs:flex-col ' id='signup'>
-                        <div className='w-screen border-4 border-[#BCCDDC] py-8 rounded-r-3xl xs:w-auto xs:rounded-none xs:rounded-t-3xl sm:content-center xl:px-5'>
+                        <div className='w-screen border-4 border-lightBlue py-8 rounded-r-3xl xs:w-auto xs:rounded-none xs:rounded-t-3xl sm:content-center xl:px-5'>
                             <h1 className='text-luckyOrange text-center font-bold text-5xl xs:text-4xl'>
                                 <AccountCircleIcon className='mr-2 mb-2 text-floralWhite' style={{ fontSize: '2.8rem' }} />
                                 SignUp
                             </h1>
-                            <h2 className='text-[#BCCDDC] text-center font-semibold text-2xl xs:text-lg'>Just some details to get you in...</h2>
+                            <h2 className='text-lightBlue text-center font-semibold text-2xl xs:text-lg'>Just some details to get you in...</h2>
                             <form className='p-4' onSubmit={signUp}>
                                 <div className='m-8 flex justify-center'>
                                 <div className='w-screen text-center px-8 xs:w-screen xs:px-0 sm:w-72 sm:px-0 md:min-w-full md:px-8 md:w-3/4 lg:w-3/5 xl:w-5/6'>
@@ -358,7 +363,7 @@ const User = () => {
                                                         <MailOutlineIcon sx={{ marginRight: 1, marginTop: -.5 }} />
                                                         Email
                                                     </React.Fragment>
-                                                }
+                                                } 
                                                 value={Email}
                                                 onChange={(e) => setEmail(e.target.value)}
                                                 variant="outlined"
@@ -408,7 +413,7 @@ const User = () => {
                                 </div>
                             </form>
                         </div>
-                        <div className='bg-[#BCCDDC] p-8 px-16 rounded-l-3xl xs:text-center xs:p-1 xs:pb-4 xs:px-2 xs:rounded-none xs:rounded-b-3xl sm:px-1.5 sm:content-center xl:px-20'>
+                        <div className='bg-lightBlue p-8 px-16 rounded-l-3xl xs:text-center xs:p-1 xs:pb-4 xs:px-2 xs:rounded-none xs:rounded-b-3xl sm:px-1.5 sm:content-center xl:px-20'>
                             <h1 className='text-luckyOrange text-5xl font-bold xs:text-3xl sm:text-3xl md:text-5xl text-center'>
                                 Roll the Carpet 
                                 <InsertEmoticonIcon  className='ml-3' sx={{ fontSize: '2.8rem', marginTop: -.5 }} />

@@ -12,7 +12,7 @@ const Home = () => {
                 <div className='w-96 xs:w-80'>
                     <img src={Logo} alt='Logo' />
                 </div>
-                <h1 className='text-5xl font-extrabold text-luckyOrange xs:text-4xl text-center'>
+                <h1 className='text-5xl font-extrabold text-luckyOrange xs:text-3xl text-center'>
                     Rock Paper Scissors
                     <Link to='/rules'>
                         <HelpOutlineIcon className='ml-2'/>

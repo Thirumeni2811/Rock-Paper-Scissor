@@ -9,6 +9,7 @@ module.exports = {
         blackPearl: '#0b1116',
         luckyOrange: '#fc6a1a',
         floralWhite: '#fefbec',
+        lightBlue: '#BCCDDC' ,
       },
       screens: {
         'xs': {'max': '576px'},          // Extra small devices (phones, 576px and down)
