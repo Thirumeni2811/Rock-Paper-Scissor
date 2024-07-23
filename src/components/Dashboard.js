@@ -54,8 +54,8 @@ const Dashboard = () => {
         <>
             <section className='h-screen bg-blackPearl'>
                 <Navbar />
-                <main className='bg-blackPearl h-screen'>
-                    <div className='flex justify-center text-luckyOrange xs:p-8 sm:p-8 sm:px-16 md:px-32 lg:px-72 xl:px-96'>
+                <main className='bg-blackPearl h-screen xs:h-auto'>
+                    <div className='flex justify-center text-luckyOrange xs:p-8  sm:p-8 sm:px-16 md:px-32 lg:px-72 xl:px-96'>
                         <table className='table-auto w-screen text-center'>
                             <thead className='bg-luckyOrange text-blackPearl'>
                                 <tr className='text-2xl'>
