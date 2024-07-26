@@ -25,7 +25,7 @@ function ResponsiveAppBar() {
   const [currentUser, setCurrentUser] = useState(null);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const isXS = useMediaQuery('(max-width:756px)');
+  const isXS = useMediaQuery('(max-width:916px)');
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
@@ -111,7 +111,7 @@ function ResponsiveAppBar() {
                   <Avatar
                     alt={currentUser?.Name || ""}
                     sx={{ bgcolor: deepOrange[500], width: 46, height: 46 }}
-                    src="/static/images/avatar/2.jpg"
+                    src={currentUser?.Photo || "/static/images/avatar/2.jpg"}
                   />
                 </Link>
                 {!isXS && (
