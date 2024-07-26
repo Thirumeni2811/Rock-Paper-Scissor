@@ -150,7 +150,7 @@ const Forget = () => {
 
   return (
     <>
-      <section className='h-screen'>
+      <section className='h-screen bg-blackPearl'>
         <header className='bg-blackPearl p-4 flex '>
           <a
             href="/"
@@ -169,7 +169,7 @@ const Forget = () => {
             <div className=' p-8 xs:px-0'>
                 <div className='border-lightBlue border-double border-4 py-7 mx-4 rounded-2xl xl:mx-32'>
                     <div>
-                        <h1 className='text-luckyOrange text-center font-bold text-5xl xs:text-4xl'>
+                        <h1 className='text-luckyOrange text-center font-bold text-5xl xs:text-3xl'>
                         <KeyIcon className='mr-2 -mt-2 text-floralWhite' style={{ fontSize: '2.8rem' }} />
                         Forgot password ?
                         </h1>
