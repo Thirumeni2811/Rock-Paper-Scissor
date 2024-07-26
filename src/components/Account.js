@@ -219,7 +219,7 @@ const Account = () => {
 
   return (
     <>
-      <section className='bg-blackPearl'>
+      <section className='bg-blackPearl h-screen'>
         <header className='bg-blackPearl p-4 flex '>
           <a
             href="/"
