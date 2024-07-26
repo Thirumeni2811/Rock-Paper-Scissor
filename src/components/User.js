@@ -246,7 +246,7 @@ const User = () => {
                     </a>
                 </header>
                 {isLogin ? (
-                    <div className='bg-blackPearl flex p-8 xs:px-6 xs:flex-col-reverse sm:p-4 md:p-8 '  id='login'>
+                    <div className='bg-blackPearl flex p-8 xs:px-6 xs:flex-col-reverse sm:p-7 md:p-8  '  id='login'>
                         <div className='w-screen border-4 border-lightBlue py-8 rounded-l-3xl xs:w-auto xs:rounded-b-3xl xs:py-4 xs:rounded-none sm:content-center xl:px-5'>
                             <h1 className='text-luckyOrange text-center font-bold text-5xl xs:text-4xl'>
                                 <AccountCircleIcon className='mr-2 mb-2 text-floralWhite' style={{ fontSize: '2.8rem' }} />

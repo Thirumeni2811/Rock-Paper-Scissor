@@ -6,7 +6,7 @@ const Footer = () => {
   return (
     <>
         <footer className='text-luckyOrange bg-blackPearl text-center p-4 text-lg font-bold border-t xs:text-base'>
-            <p>Copyright &copy; {year} <span className='hover:text-floralWhite'><a href='https://github.com/Thirumeni2811/'>Thirumeni</a></span> . All rights reserved.</p>
+            <p>Copyright &copy; {year} <span className='hover:text-floralWhite'><a href='https://www.linkedin.com/in/thirumeni-m/'>Thirumeni</a></span> . All rights reserved.</p>
         </footer>
     </>
   )

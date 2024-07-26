@@ -50,7 +50,6 @@ const Authenticate = () => {
                     await setDoc(doc(db, "User", user.uid), {
                       Email: user.email,
                       Name: user.displayName,
-                      Photo: user.photoURL,
                     });
                     toast.success("Login Successfully !!", {
                       position: "top-center",

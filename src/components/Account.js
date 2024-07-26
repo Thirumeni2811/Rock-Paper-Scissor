@@ -235,7 +235,7 @@ const Account = () => {
         </header>
 
         <main>
-          <div className='bg-blackPearl p-8 xs:px-0'>
+          <div className='bg-blackPearl p-8 xs:px-0 xs:py-14'>
             <div className='border-lightBlue border-double border-4 py-7 mx-4 rounded-2xl xl:mx-32'>
                 <h1 className='text-luckyOrange text-center font-bold text-5xl xs:text-4xl'>
                 <AccountCircleIcon className='mr-2 -mt-2 text-floralWhite' style={{ fontSize: '2.8rem' }} />

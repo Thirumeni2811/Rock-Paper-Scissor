@@ -16,7 +16,7 @@ const Dashboard = () => {
                 collection(db, "Game"),
                 where("userID", "==", userID),
                 orderBy("timestamp", "desc"),
-                limit(8)
+                limit(10)
             );
             const querySnapshot = await getDocs(q);
 
@@ -54,14 +54,14 @@ const Dashboard = () => {
         <>
             <section className='h-screen bg-blackPearl'>
                 <Navbar />
-                <main className='bg-blackPearl h-screen xs:h-auto'>
+                <main className='bg-blackPearl'>
                     <div className='flex justify-center text-luckyOrange xs:p-8  sm:p-8 sm:px-16 md:px-32 lg:px-72 xl:px-96'>
                         <table className='table-auto w-screen text-center'>
                             <thead className='bg-luckyOrange text-blackPearl'>
                                 <tr className='text-2xl'>
-                                    <th className='py-4 px-4 font-extrabold rounded-tl-2xl'>Computer</th>
-                                    <th className='py-4 px-4 font-extrabold'>Result</th>
-                                    <th className='py-4 px-4 font-extrabold rounded-tr-2xl'>User</th>
+                                    <th className='py-4 px-4 font-extrabold rounded-tl-2xl xs:text-base'>Computer</th>
+                                    <th className='py-4 px-4 font-extrabold xs:text-base'>Result</th>
+                                    <th className='py-4 px-4 font-extrabold rounded-tr-2xl xs:text-base'>User</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -71,18 +71,18 @@ const Dashboard = () => {
                                         className={index % 2 === 0 ? 'bg-floralWhite' : 'bg-lightBlue'}
                                     >
                                         <td 
-                                            className={`py-4 px-2 font-extrabold text-2xl ${result.result === 'Computer Wins' ? 'text-blackPearl' : ''}`}
+                                            className={`py-4 px-2  xs:py-2 font-extrabold text-2xl xs:text-base ${result.result === 'Computer Wins' ? 'text-blackPearl' : ''}`}
                                             style={{ borderBottomLeftRadius: index === gameResults.length - 1 ? '16px' : '0' }}
                                         >
                                             {result.computerPoints}
                                         </td>
                                         <td 
-                                            className={`py-4 px-2 font-extrabold text-2xl ${result.result === 'Computer Wins' ? 'text-blackPearl' : ''}`}
+                                            className={`py-4 px-2 xs:py-2  font-extrabold text-2xl xs:text-base ${result.result === 'Computer Wins' ? 'text-blackPearl' : ''}`}
                                         >
                                             {result.result}
                                         </td>
                                         <td 
-                                            className={`py-4 px-2 font-extrabold text-2xl ${result.result === 'Computer Wins' ? 'text-blackPearl' : ''}`}
+                                            className={`py-4 px-2 xs:py-2 font-extrabold text-2xl xs:text-base ${result.result === 'Computer Wins' ? 'text-blackPearl' : ''}`}
                                             style={{ borderBottomRightRadius: index === gameResults.length - 1 ? '16px' : '0' }}
                                         >
                                             {result.userPoints}
