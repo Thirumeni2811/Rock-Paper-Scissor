@@ -90,7 +90,7 @@ const Authenticate = () => {
                 toast.error("Login Failed: " + error.message, {
                   position: "bottom-center",
                 });
-                console.log("Error during Facebook Login: ", error);
+                console.log("Error during Twitter Login: ", error);
             });
     }
 
