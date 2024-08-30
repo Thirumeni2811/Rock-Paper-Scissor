@@ -94,7 +94,6 @@ const Dashboard = () => {
                         </table>
                     </div>
                 </main>
-                <Footer />
             </section>
         </>
     );

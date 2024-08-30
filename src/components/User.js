@@ -231,7 +231,7 @@ const User = () => {
 
     return (
         <>
-            <section>
+            <section className='h-screen bg-blackPearl'>
                 <header className='bg-blackPearl p-4'>
                     <a
                     href="/"
@@ -438,7 +438,6 @@ const User = () => {
                         </div>
                     </div>
                 )}
-                <Footer />
 
             </section>
         </>
